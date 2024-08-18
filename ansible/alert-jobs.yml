@@ -6,7 +6,7 @@
 
   tasks:
     # This file contains the http request command
-    - name: Create the script to execute the http request
+    - name: Create the script to execute the http request to send notifications
       copy: 
         dest: /home/pi/http_alert_notification.sh
         content: "
