@@ -1,0 +1,35 @@
+- name: Config cronjob to make HTTP request to send notifications for cyber alerts
+  hosts: raspi
+  remote_user: pi
+  become: yes
+  become_user: root
+
+  tasks:
+    # This file contains the http request command
+    - name: Create the script to execute the http request
+      copy: 
+        dest: /home/pi/http_alert_notification.sh
+        content: "
+          #!/bin/bash
+
+          curl --trace-time -X POST localhost:8080/alertnotification
+        "
+        mode: '0755'
+
+    # This file contains the log of the cronjob executions
+    - name: Ensure /var/log/cronjob.log has the right permissions
+      file:
+        path: /var/log/cronjob.log
+        state: touch
+        owner: pi
+        group: pi
+        mode: '0644'
+
+    # Command to create the cronjob
+    - name: Creates the cron file under /etc/cron.d
+      ansible.builtin.cron:
+        name: Alert notifications cronjob
+        minute: "*/10"
+        user: pi
+        cron_file: alert-notification
+        job: "/home/pi/myscript.sh >> /var/log/cronjob.log 2>&1"
