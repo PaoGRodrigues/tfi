@@ -1,4 +1,4 @@
-version: '1'
+version: '3.5'
 
 services:
   redis:
@@ -6,25 +6,24 @@ services:
     image: redis:alpine
     command: --save 900 1
     volumes:
-      - ./data/redis:/data
+      - /data/redis:/data
     restart: on-failure:5
     ports:
       - "6379:6379"
     network_mode: "host"
   ntopng:
-    container_name: "ntopng app"
+    container_name: "ntopng_tool"
     build:
-      context: ntop
-      dockerfile: Dockerfile
-    command: ntopng --community -d /var/lib/ntopng -r 127.0.0.1:6379 -d /ntopngcustom -i wlan0 -w localhost:4000
+      dockerfile: ./ntopng/Dockerfile
+    command: ntopng --community -i wlan0 -w localhost:3000 -r localhost:6379 -d /ntopngcustom
     volumes:
-      - ./data/ntopng:/var/lib/ntopng
+      - /data/ntopng:/ntopng
     restart: on-failure:5
     network_mode: "host"
     depends_on:
       - redis
   backend:
-    container_name: "backend app"
+    container_name: "backend_app"
     build:
       context: backend
       dockerfile: /tfi/docker/backend/Dockerfile

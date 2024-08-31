@@ -1,11 +1,19 @@
-FROM ubuntu:focal
+FROM debian:bullseye
 
-RUN apt-get update && apt-get -y upgrade \
-    && apt-get install -y software-properties-common wget curl \
-    && wget https://packages.ntop.org/apt-stable/20.04/all/apt-ntop-stable.deb \
-    && apt install -y ./apt-ntop-stable.deb \
-    && apt-get install -y ntopng \
-    && systemctl enable ntopng
+RUN apt-get update && apt-get install -y software-properties-common wget curl 
+
+RUN wget https://packages.ntop.org/RaspberryPI/apt-ntop.deb 
+
+RUN apt-get install -y gnupg
+
+RUN dpkg -i apt-ntop.deb \
+    && apt-get update 
+
+RUN apt-get install -y ntopng nprobe
+
+RUN apt-get upgrade -y
 
 RUN mkdir /ntopngcustom \
     && chmod 777 /ntopngcustom
+
+#CMD [ "ntopng --community -i wlan0 -w localhost:3000 -r localhost:6379 -d /ntopngcustom" ]
