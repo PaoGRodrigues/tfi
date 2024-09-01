@@ -1,3 +1,6 @@
 [submodule "docker/backend"]
 	path = docker/backend
 	url = git@github.com:PaoGRodrigues/tfi-backend
+[submodule "docker/frontend"]
+	path = docker/frontend
+	url = git@github.com:PaoGRodrigues/tfi-frontend

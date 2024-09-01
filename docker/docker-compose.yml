@@ -20,6 +20,8 @@ services:
       - /data/ntopng:/ntopng
     restart: on-failure:5
     network_mode: "host"
+    ports:
+      - "3000:4000"
     depends_on:
       - redis
   backend:
@@ -28,3 +30,13 @@ services:
       context: backend
       dockerfile: ./Dockerfile
     network_mode: "host"
+    ports:
+      - "8080:8080"
+  frontend:
+    container_name: "frontend"
+    build:
+      context: frontend
+      dockerfile: ./Dockerfile
+    network_mode: "host"
+    ports:
+      - "3000:3000"
