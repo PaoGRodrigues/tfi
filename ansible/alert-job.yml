@@ -11,15 +11,14 @@
         dest: /home/pi/http_alert_notification.sh
         content: "
           #!/bin/bash
-
-          curl --trace-time -X POST localhost:8080/alertnotification
+            curl --trace-time -X POST localhost:8080/alertnotification
         "
         mode: '0755'
 
     # This file contains the log of the cronjob executions
-    - name: Ensure /var/log/cronjob.log has the right permissions
+    - name: Ensure /var/log/cronjob_alert.log has the right permissions
       file:
-        path: /var/log/cronjob.log
+        path: /var/log/cronjob_alert.log
         state: touch
         owner: pi
         group: pi
@@ -29,7 +28,7 @@
     - name: Creates the cron file under /etc/cron.d
       ansible.builtin.cron:
         name: Alert notifications cronjob
-        minute: "*/10"
+        minute: "*/5"
         user: pi
         cron_file: alert-notification
-        job: "/home/pi/myscript.sh >> /var/log/cronjob.log 2>&1"
+        job: "/home/pi/http_alert_notification.sh >> /var/log/cronjob_alert.log 2>&1"
