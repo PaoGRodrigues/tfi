@@ -70,6 +70,10 @@
         ssid: "{{ ssid_arg }}"
         wpa_passphare: "{{ wpa_passphare_arg }}"
     
+     # This file contains the playbooks for the cronjob playbooks.
+    - include: traffic-job.yml
+    - include: alert-job.yml
+
     # Restart the Raspi
     - name: Unconditionally reboot the machine with all defaults
       reboot:
