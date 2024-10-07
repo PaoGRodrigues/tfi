@@ -1,37 +1,30 @@
-- name: Config cronjob to make HTTP request to store the traffic
-  hosts: raspi
-  remote_user: pi
-  become: yes
-  become_user: root
+# This file contains the http request command
+- name: Create the script to execute the http request
+  copy: 
+    dest: /home/pi/http_store_traffic.sh
+    content: "
+    #!/bin/bash
+        for run in {1..12}; do sleep 5;
+        curl --trace-time -X POST localhost:8080/hosts;
+        curl --trace-time -X POST localhost:8080/activeflows;
+      done
+    "
+    mode: '0755'
 
-  tasks:
-    # This file contains the http request command
-    - name: Create the script to execute the http request
-      copy: 
-        dest: /home/pi/http_store_traffic.sh
-        content: "
-        #!/bin/bash
-            for run in {1..12}; do sleep 5;
-            curl --trace-time -X POST localhost:8080/hosts;
-            curl --trace-time -X POST localhost:8080/activeflows;
-          done
-        "
-        mode: '0755'
+# This file contains the log of the cronjob executions
+- name: Ensure /var/log/cronjob_traffic.log has the right permissions
+  file:
+    path: /var/log/cronjob_traffic.log
+    state: touch
+    owner: pi
+    group: pi
+    mode: '0644'
 
-    # This file contains the log of the cronjob executions
-    - name: Ensure /var/log/cronjob_traffic.log has the right permissions
-      file:
-        path: /var/log/cronjob_traffic.log
-        state: touch
-        owner: pi
-        group: pi
-        mode: '0644'
-
-    # Command to create the cronjob
-    - name: Creates the cron file under /etc/cron.d
-      ansible.builtin.cron:
-        name: Store traffic cronjob
-        minute: "*"
-        user: pi
-        cron_file: store-traffic
-        job: "/home/pi/http_store_traffic.sh >> /var/log/cronjob_traffic.log 2>&1"
+# Command to create the cronjob
+- name: Creates the cron file under /etc/cron.d
+  ansible.builtin.cron:
+    name: Store traffic cronjob
+    minute: "*"
+    user: pi
+    cron_file: store-traffic
+    job: "/home/pi/http_store_traffic.sh >> /var/log/cronjob_traffic.log 2>&1"

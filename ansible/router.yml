@@ -5,10 +5,14 @@
   become_user: root
 
   tasks:
+    - name: Update packages
+      command: apt-get update
+
     - name: Install packages
       apt:
         name: 
           - hostapd
+          - dhcpcd5
           - dnsmasq
           - netfilter-persistent
           - iptables-persistent
@@ -40,6 +44,14 @@
         group: root
         mode: 0644
 
+    - name: Config wlan0 interface
+      copy:
+        src: wlan0.conf
+        dest: /etc/network/interfaces.d/wlan0
+        owner: root
+        group: root
+        mode: 0644
+
     # Commands to add IPTables NAT rule and make it persistent
     - name: Config IPTables rule in nat table with postrouting chain
       shell: iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -66,13 +78,15 @@
         src: hostapd.j2
         dest: /etc/hostapd/hostapd.conf
       vars: 
-        country_code: "{{ country_code_arg }}"
-        ssid: "{{ ssid_arg }}"
-        wpa_passphare: "{{ wpa_passphare_arg }}"
+        country_code: "{{ country_code }}"
+        ssid: "{{ ssid }}"
+        wpa_passphare: "{{ wpa_passphare }}"
     
      # This file contains the playbooks for the cronjob playbooks.
-    - include: traffic-job.yml
-    - include: alert-job.yml
+    - name: Include traffic job 
+      include_tasks: traffic-job.yml
+    - name: Include alerts job
+      include_tasks: alert-job.yml
 
     # Restart the Raspi
     - name: Unconditionally reboot the machine with all defaults
