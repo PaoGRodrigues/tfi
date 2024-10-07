@@ -12,6 +12,7 @@
       apt:
         name: 
           - hostapd
+          - dhcpcd5
           - dnsmasq
           - netfilter-persistent
           - iptables-persistent
@@ -39,6 +40,14 @@
       copy:
         src: routed-ap.conf
         dest: /etc/sysctl.d/routed-ap.conf
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Config wlan0 interface
+      copy:
+        src: wlan0.conf
+        dest: /etc/network/interfaces.d/wlan0
         owner: root
         group: root
         mode: 0644
