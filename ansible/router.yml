@@ -78,15 +78,9 @@
         src: hostapd.j2
         dest: /etc/hostapd/hostapd.conf
       vars: 
-        country_code: "{{ country_code }}"
-        ssid: "{{ ssid }}"
-        wpa_passphare: "{{ wpa_passphare }}"
-    
-     # This file contains the playbooks for the cronjob playbooks.
-    - name: Include traffic job 
-      include_tasks: traffic-job.yml
-    - name: Include alerts job
-      include_tasks: alert-job.yml
+        country_code: "{{ country_code_arg }}"
+        ssid: "{{ ssid_arg }}"
+        wpa_passphare: "{{ wpa_passphare_arg }}"
 
     # Restart the Raspi
     - name: Unconditionally reboot the machine with all defaults
