@@ -2,10 +2,8 @@
 - name: Create the script to execute the http request to send notifications
   copy: 
     dest: /home/pi/http_alert_notification.sh
-    content: "
-      #!/bin/bash
-        curl --trace-time -X POST localhost:8080/alertnotification
-    "
+    content: "#!/bin/bash\n
+      curl --trace-time -X POST localhost:8080/alertnotification\n"
     mode: '0755'
 
 # This file contains the log of the cronjob executions

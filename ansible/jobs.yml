@@ -1,0 +1,15 @@
+- name: Create jobs
+  hosts: raspi
+  remote_user: pi
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: Update packages
+      command: apt-get update
+
+   # This file contains the playbooks for the cronjob playbooks.
+    - name: Include traffic job 
+      include_tasks: traffic-job.yml
+    - name: Include alerts job
+      include_tasks: alert-job.yml

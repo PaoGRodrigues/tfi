@@ -2,13 +2,11 @@
 - name: Create the script to execute the http request
   copy: 
     dest: /home/pi/http_store_traffic.sh
-    content: "
-    #!/bin/bash
-        for run in {1..12}; do sleep 5;
-        curl --trace-time -X POST localhost:8080/hosts;
-        curl --trace-time -X POST localhost:8080/activeflows;
-      done
-    "
+    content: "#!/bin/bash\n
+      for run in {1..12}; do sleep 5;\n
+      curl --trace-time -X POST localhost:8080/hosts;\n
+      curl --trace-time -X POST localhost:8080/activeflows;\n
+      done"
     mode: '0755'
 
 # This file contains the log of the cronjob executions
