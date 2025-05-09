@@ -64,4 +64,4 @@ Para crearlos:
 Para la configuración de la key de Github en la Raspberry Pi, ver [Configuración key de Github](docs/configKeyGithub.md).
 
 ### Instalación de la herramienta de monitoreo
-Para la instalación de la herramienta de monitoreo en la Raspberry Pi, ver [Instalación herramienta de monitoreo](docs/configKeyGithub.md).
+Para la instalación de la herramienta de monitoreo en la Raspberry Pi, ver [Instalación herramienta de monitoreo](docs/configTool.md).
