@@ -3,7 +3,16 @@
 ![Ansible](https://img.shields.io/badge/config-Ansible-black?logo=ansible&logoColor=white)
 
 ## Introducción
-Este repositorio contiene la configuración de la Raspberry Pi y los archivos para el deploy de los jobs del trabajo final **Análisis, visibilidad de tráfico y seguridad para usuarios finales en redes hogareñas**.
+Este repositorio contiene la configuración del trabajo final **Análisis, visibilidad de tráfico y seguridad para usuarios finales en redes hogareñas**.
+
+En este repositorio se encuentra:
+* La configuración inicial de la Raspberry Pi
+* La configuración de la Raspberry Pi como _Access Point_
+* La configuración del _token_ de Github para poder clonar los repositorios del _backend_ y del _frontend_
+* La instalación de la herramienta de monitoreo de tráfico
+* El despliegue de los _cron jobs_ que ejecutan llamadas programadas a la _API_ para guardar información en la base de datos
+
+Al finalizar con la ejecución de este repositorio, se tendrá el ambiente preparado para el despliegue del [backend](https://github.com/PaoGRodrigues/tfi-backend) y del [frontend](http://github.com/PaoGRodrigues/tfi-frontend).
 
 ## Instalación
 ### Prerrequisitos
@@ -40,7 +49,7 @@ Para la instalación del sistema operativo y el acceso remoto en la Raspberry, v
 
 7. Al finalizar la configuración, se debe ver lo siguiente
     
-    ![](docs/execution.png)
+    ![Ejecución](docs/execution.png)
 
     A partir de esta configuración, se verá que las interfaces quedaron configuradas como:
     * Eth0: 192.168.0.13/24.
