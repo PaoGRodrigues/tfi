@@ -32,14 +32,18 @@ Para la instalación del sistema operativo y el acceso remoto en la Raspberry, v
 #### Configurar el _Access Point_ 
 1. En la computadora local, instalar Git y ansible.
 2. Clonar este repositorio donde se encuentra el archivo **yml** que contiene la configuración que se va a aplicar. Cuando pida usuario y contraseña, indicar el usuario y el token creado en el paso Configuración del token de Github.
-    ```$ git clone https://github.com/PaoGRodrigues/tfi```
+    ```
+    $ git clone https://github.com/PaoGRodrigues/tfi
+    ```
 3. Mover la llave privada a la carpeta ansible.
 4. Modificar el archivo hosts por la IP de la Raspberry (y el nombre de la llave privada en caso de haberle cambiado el nombre al archivo).
 
     ![Modificar yml](docs/AnsibleImage.png)
 
 5. Chequear la conexión con la Raspberry respecto al host y la llave especificados
-    ```$ ansible -i hosts raspi -m ping```
+    ```
+    $ ansible -i hosts raspi -m ping
+    ```
 6. Para aplicar las configuraciones que contienen los archivos, ejecutar el siguiente comando.
     ```
     $ ansible-playbook router.yml 

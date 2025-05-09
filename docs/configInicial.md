@@ -46,13 +46,23 @@ Conectar a la Raspberry Pi:
     * Se puede indicar una passphrase. En este caso, se omite este paso para que no se deba indicar ese código cada vez que se autentica el usuario por SSH.
     * Para este punto ya se tienen dos archivos ```rpi_rsa``` y ```rpi_rsa.pub ```
 2. Conectar la Raspberry Pi con el cable Ethernet al router del proveedor.
-3. Instalar nmap. ```$ brew install nmap```
-4. Sabiendo la red de tu wifi, correr el siguiente comando para listar los dispositivos presentes en la red. (Puede tardar algunos minutos) ```$ sudo nmap -O 192.168.0.0/24```
+3. Instalar nmap. 
+```
+$ brew install nmap
+```
+4. Sabiendo la red de tu wifi, correr el siguiente comando para listar los dispositivos presentes en la red. (Puede tardar algunos minutos) 
+```
+$ sudo nmap -O 192.168.0.0/24
+```
 5. A partir de este comando se tendrá una lista de dispositivos con sus sistemas operativos detectados. Buscar el que corresponda a la Raspberry Pi.
     ![Nmap](IPImage.png)
 
 6. Con la IP obtenida (para este caso, 192.168.0.13), correr el siguiente comando para conectarse a la Raspberry por SSH con el usuario pi e ingresar la contraseña establecida en la sección Configuración inicial > Usuario, contraseña y boot. 
-```$ ssh pi@192.168.0.13```
+```
+$ ssh pi@192.168.0.13
+```
 7. Una vez verificada la conexión, desde la computadora local copiar la llave pública que se creó en el paso 1 ejecutando el siguiente comando.
-```$ ssh-copy-id -i ~/.ssh/rpi_rsa.pub pi@192.168.0.13```
+```
+$ ssh-copy-id -i ~/.ssh/rpi_rsa.pub pi@192.168.0.13
+```
 8. Probar el acceso sin contraseña, usando la llave privada.
