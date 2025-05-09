@@ -6,7 +6,10 @@
 Para instalar la versión de la herramienta que se utiliza en el presente trabajo (6.1.240628), seguir los siguientes pasos:
 
 1. Ingresar a la Raspberry por SSH usando la clave privada.
-2. Cambiar a usuario root ejecutando ```$ sudo su -```
+2. Cambiar a usuario root ejecutando 
+```
+$ sudo su -
+```
 3. Agregar los repositorios desde donde se descargan los paquetes y hacer una actualización de los mismos.
 
     ```
@@ -19,7 +22,9 @@ Para instalar la versión de la herramienta que se utiliza en el presente trabaj
     $ apt-get update 
     ```
 4. Instalar los paquetes iniciales.
-    ```$ apt-get install libssl1.1 libldap-2.4.2 nprobe```
+    ```
+    $ apt-get install libssl1.1 libldap-2.4.2 nprobe
+    ```
 5. Descargar los paquetes de la herramienta con wget.
     ```
     $ wget -O ntopng.deb https://packages.ntop.org/RaspberryPI/bullseye_pi/arm64/ntopng/ntopng_6.1.240628-23672_arm64.deb
@@ -33,7 +38,9 @@ Para instalar la versión de la herramienta que se utiliza en el presente trabaj
     $ dpkg -i ntopng
     ```
 7. Para iniciar la herramienta y comenzar el análisis, ejecutar
-```$ sudo ntopng --community -i wlan0 -w 192.168.0.13:3000```
+```
+$ sudo ntopng --community -i wlan0 -w 192.168.0.13:3000
+```
 
 Este último comando iniciará la herramienta en versión _Community_, haciendo análisis sobre el tráfico que pase por la interfaz **wlan0** (la interfaz configurada como _access point_ en la Raspberry) y dejará disponible el _frontend web_ de la propia herramienta en la dirección IP de la Raspberry Pi en el puerto **3000**. Si bien este _frontend_ está disponible, no se usará de manera activa en la solución planteada. 
 
@@ -55,15 +62,23 @@ Se configuró la geolocalización de **ntopng** según la [documentación](https
 5. Ejecutar los siguientes comandos, reemplazando el **YOUR_ACCOUNT_ID** y el **YOUR_LICENSE_KEY** por los datos obtenidos anteriormente.
 
     * Descargar la base de datos de ASN
-    ```$ curl -O -J -L -u YOUR_ACCOUNT_ID:YOUR_LICENSE_KEY 'https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz'```
+    ```
+    $ curl -O -J -L -u YOUR_ACCOUNT_ID:YOUR_LICENSE_KEY 'https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz'
+    ```
 
     * Descargar la base de datos de países
-    ```$ curl -O -J -L -u YOUR_ACCOUNT_ID:YOUR_LICENSE_KEY 'https://download.maxmind.com/geoip/databases/GeoLite2-Country/download?suffix=tar.gz'```
+    ```
+    $ curl -O -J -L -u YOUR_ACCOUNT_ID:YOUR_LICENSE_KEY 'https://download.maxmind.com/geoip/databases/GeoLite2-Country/download?suffix=tar.gz'
+    ```
 
     * Descargar la base de datos de ciudades
-    ```$ curl -O -J -L -u YOUR_ACCOUNT_ID:YOUR_LICENSE_KEY 'https://download.maxmind.com/geoip/databases/GeoLite2-City/download?suffix=tar.gz'```
+    ```
+    $ curl -O -J -L -u YOUR_ACCOUNT_ID:YOUR_LICENSE_KEY 'https://download.maxmind.com/geoip/databases/GeoLite2-City/download?suffix=tar.gz'
+    ```
 6. Descomprimir los archivos descargados con el comando.
-```$ tar -xvzf NombreDelArchivo```
+```
+$ tar -xvzf NombreDelArchivo
+```
 7. Crear un directorio y hacer _backup_ de las bases de datos que trae la herramienta instaladas por defecto. Ejecutar los siguientes comandos.
     ```
     $ cd /usr/share/ntopng/httpdocs/geoip/
