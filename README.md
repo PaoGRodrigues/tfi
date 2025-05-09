@@ -40,7 +40,7 @@ Para la instalación del sistema operativo y el acceso remoto en la Raspberry, v
 
 7. Al finalizar la configuración, se debe ver lo siguiente
     
-    ![](docs/execution.png)
+    ![Ejecución](docs/execution.png)
 
     A partir de esta configuración, se verá que las interfaces quedaron configuradas como:
     * Eth0: 192.168.0.13/24.
