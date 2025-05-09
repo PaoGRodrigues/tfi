@@ -7,7 +7,7 @@ Este repositorio contiene la configuración de la Raspberry Pi y los archivos pa
 
 ## Instalación
 ### Prerrequisitos
-* Una Raspberry Pi 
+* Una Raspberry Pi 4 Model B, con 4GB de RAM, y una MicroSD de 32GB.
 * Un teclado, un mouse y un monitor para instalar el sistema operativo en la Raspberry
 * Una computadora para la descarga de la imagen del sistema operativo de la Raspberry (Nota: para este caso, se usará una MacBook Pro).
 * Una tarjeta microSD
